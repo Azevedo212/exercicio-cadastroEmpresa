@@ -42,76 +42,177 @@ namespace Cadastro_de_empresa
 
         private void bt_cadastrar_Click(object sender, EventArgs e)
         {
-            try
+
+            Cadastro cad = new Cadastro();
+
+            cad.Razao = tx_Razao.Text;
+            cad.Tipo = "";
+            cad.Porte = "";
+            cad.Regime = "";
+            cad.Cnpj = tx_cnpj.Text;
+            cad.Razao = tx_Razao.Text;
+            cad.NomeFantasia = tx_nomeFantasia.Text;
+            cad.Situacao = tx_situacao.Text;
+            cad.DataAtividade = tx_dataAtividade.Text;
+            cad.Telefone = tx_telefone.Text;
+            cad.Capital = tx_capital.Text;
+            cad.Estado = tx_estado.Text;
+            cad.Cidade = tx_cidade.Text;
+            cad.Bairro = tx_bairro.Text;
+            cad.Rua = tx_rua.Text;
+            cad.Natureza = tx_natureza.Text;
+            cad.NomeProprietario = tx_nomeProprietario.Text;
+            cad.Cpf = tx_cpf.Text;
+
+            if (radioButton1.Checked == true)
             {
-                string regime;
-                string tipo;
-                string porte;
+                cad.Regime = radioButton1.Text;
+            }
+            else if (radioButton2.Checked == true)
+            {
+                cad.Regime = radioButton2.Text;
+            }
+            else
+            {
+                cad.Regime = radioButton3.Text;
+            }
 
-                string cnpj = tx_cnpj.Text;
-                string razao = tx_Razao.Text;
-                string nomeFantasia = tx_nomeFantasia.Text;
-                string situacao = tx_situacao.Text;
-                string dataAtividade = tx_dataAtividade.Text;
-                string telefone = tx_telefone.Text;
-                string capital = tx_capital.Text;
-                string estado = tx_estado.Text;
-                string cidade = tx_cidade.Text;
-                string bairro = tx_bairro.Text;
-                string rua = tx_rua.Text;
-                string natureza = tx_natureza.Text;
-                string nomeProprietario = tx_nomeProprietario.Text;
-                string cpf = tx_cpf.Text;
+            if (radio_filial.Checked == true)
+            {
+                cad.Tipo = radio_filial.Text;
+            }
+            else
+            {
+                cad.Tipo = radio_matriz.Text;
+            }
 
-                if (radioButton1.Checked == true)
-                {
-                    regime = radioButton1.Text;
-                }
-                else if (radioButton2.Checked == true)
-                {
-                    regime = radioButton2.Text;
-                }
-                else
-                {
-                    regime = radioButton3.Text;
-                }
+            if (radio_pequeno.Checked == true)
+            {
+                cad.Porte = radio_pequeno.Text;
+            }
+            else if (radio_media.Checked == true)
+            {
+                cad.Porte = radio_media.Text;
+            }
+            else
+            {
+                cad.Porte = radio_grande.Text;
+            }
 
-                if (radio_filial.Checked == true)
-                {
-                    tipo = radio_filial.Text;
-                }
-                else
-                {
-                    tipo = radio_matriz.Text;
-                }
-
-                if (radio_pequeno.Checked == true)
-                {
-                    porte = radio_pequeno.Text;
-                }
-                else if (radio_media.Checked == true)
-                {
-                    porte = radio_media.Text;
-                }
-                else
-                {
-                    porte = radio_grande.Text;
-                }
-
+            if (Validar())
+            {
                 MessageBox.Show("Cadastrado com sucesso!!!");
-                MessageBox.Show($"INFORMAÇÕES: \n Cnpj: {cnpj} \n Razão Social: {razao} \n Nome Fantasia: {nomeFantasia} \n Situação Cadastral: {situacao} \n " +
-                    $"Regime Tributário: {regime} \n Data de Início de Atividade: {dataAtividade} \n Telefone: {telefone} \n Capital Social: {capital} \n " +
-                    $"Estado: {estado} \n Cidade: {cidade} \n Bairro: {bairro} \n Rua: {rua} \n Tipo: {tipo} \n Porte da Empresa: {porte} \n" +
-                    $"Natureza Jurídica: {natureza} \n Nome do proprietário: {nomeProprietario} \n CPF do Proprietário: {cpf}");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Preencha todos os campos!!!" + ex.Message);
-            }
-            {
+                MessageBox.Show($"INFORMAÇÕES: \n Cnpj: {cad.Cnpj} \n Razão Social: {cad.Razao} \n Nome Fantasia: {cad.NomeFantasia} \n Situação Cadastral: {cad.Situacao} \n " +
+                    $"Regime Tributário: {cad.Regime} \n Data de Início de Atividade: {cad.DataAtividade} \n Telefone: {cad.Telefone} \n Capital Social: {cad.Capital} \n " +
+                    $"Estado: {cad.Estado} \n Cidade: {cad.Cidade} \n Bairro: {cad.Bairro} \n Rua: {cad.Rua} \n Tipo: {cad.Tipo} \n Porte da Empresa: {cad.Porte} \n" +
+                    $"Natureza Jurídica: {cad.Natureza} \n Nome do proprietário: {cad.NomeProprietario} \n CPF do Proprietário: {cad.Cpf}");
 
+                tx_nomeFantasia.Clear();
+                tx_cnpj.Clear();
+                tx_Razao.Clear();
+                tx_estado.ResetText();
+                tx_cidade.Clear();
+                tx_rua.Clear();
+                tx_bairro.Clear();
+                tx_dataAtividade.Clear();
+                tx_situacao.ResetText();
+                tx_telefone.ResetText();
+                tx_capital.ResetText();
+                tx_nomeProprietario.Clear();
+                tx_cpf.Clear();
+                tx_natureza.ResetText();
             }
 
+            else
+            {
+                MessageBox.Show("Formato Inválido!");
+                MessageBox.Show("Preencha todos os campos!!!");
+            }
+
+        }
+
+        public bool Validar()
+        {
+            bool validacao;
+
+            if (tx_nomeFantasia.Text == "")
+            {
+                validacao = false;
+            }
+            else if (tx_dataAtividade.Text == "")
+            {
+                validacao = false;
+            }
+            else if (tx_situacao.Text == "")
+            {
+                validacao = false;
+            }
+            else if (tx_telefone.Text == "")
+            {
+                validacao = false;
+            }
+            else if (tx_capital.Text == "")
+            {
+                validacao = false;
+            }
+            else if (tx_estado.Text == "")
+            {
+                validacao = false;
+            }
+            else if (tx_cidade.Text == "")
+            {
+                validacao = false;
+            }
+            else if (tx_bairro.Text == "")
+            {
+                validacao = false;
+            }
+            else if (tx_rua.Text == "")
+            {
+                validacao = false;
+            }
+            else if (tx_natureza.Text == "")
+            {
+                validacao = false;
+            }
+            else if (tx_estado.Text == "")
+            {
+                validacao = false;
+            }
+
+            else if (tx_nomeProprietario.Text == "")
+            {
+                validacao = false;
+            }
+            else if (tx_cpf.Text == "")
+            {
+                validacao = false;
+            }
+
+            else
+            {
+                validacao = true;
+            }
+
+            return validacao;
+        }
+
+        private void bt_cancelar_Click(object sender, EventArgs e)
+        {
+            tx_nomeFantasia.Clear();
+            tx_cnpj.Clear();
+            tx_Razao.Clear();
+            tx_estado.ResetText();
+            tx_cidade.Clear();
+            tx_rua.Clear();
+            tx_bairro.Clear();
+            tx_dataAtividade.Clear();
+            tx_situacao.ResetText();
+            tx_telefone.ResetText();
+            tx_capital.ResetText();
+            tx_nomeProprietario.Clear();
+            tx_cpf.Clear();
+            tx_natureza.ResetText();
         }
     }
 }

@@ -56,4 +56,9 @@
 
 
     }
+
+    public Cadastro()
+    {
+
+    }
 }

@@ -69,6 +69,7 @@
             label16 = new Label();
             bt_cadastrar = new Button();
             groupBox3 = new GroupBox();
+            bt_cancelar = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -468,11 +469,22 @@
             groupBox3.TabStop = false;
             groupBox3.Text = "Tipo";
             // 
+            // bt_cancelar
+            // 
+            bt_cancelar.Location = new Point(522, 499);
+            bt_cancelar.Name = "bt_cancelar";
+            bt_cancelar.Size = new Size(97, 45);
+            bt_cancelar.TabIndex = 46;
+            bt_cancelar.Text = "Cancelar";
+            bt_cancelar.UseVisualStyleBackColor = true;
+            bt_cancelar.Click += bt_cancelar_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(803, 556);
+            Controls.Add(bt_cancelar);
             Controls.Add(groupBox3);
             Controls.Add(bt_cadastrar);
             Controls.Add(label16);
@@ -562,5 +574,6 @@
         private Label label16;
         private Button bt_cadastrar;
         private GroupBox groupBox3;
+        private Button bt_cancelar;
     }
 }
